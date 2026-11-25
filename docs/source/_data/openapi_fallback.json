@@ -4139,6 +4139,205 @@
         }
       }
     },
+    "/modulo-fornecedor/3_consultarEstatisticoGeografico": {
+      "get": {
+        "tags": [
+          "10 - FORNECEDOR"
+        ],
+        "operationId": "consultaEstatisticoGeografico",
+        "parameters": [
+          {
+            "name": "pagina",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "tamanhoPagina",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          },
+          {
+            "name": "ufSigla",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "nomeMunicipio",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "codigoCnae",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "porteEmpresaId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "DEMAIS",
+                "EMPRESA_DE_PEQUENO_PORTE",
+                "EQUIPARADA",
+                "MICRO_EMPRESA",
+                "MICROEMPREENDEDOR_INDIVIDUAL"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericAPIResponseDTOFornecedorEstatisticoGeograficoDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/modulo-fornecedor/3.1_consultarEstatisticoGeograficoInternacional": {
+      "get": {
+        "tags": [
+          "10 - FORNECEDOR"
+        ],
+        "operationId": "consultaEstatisticoGeograficoInternacional",
+        "parameters": [
+          {
+            "name": "pagina",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "tamanhoPagina",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          },
+          {
+            "name": "paisCodigoIso",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericAPIResponseDTOFornecedorEstatisticoGeograficoInternacionalDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/modulo-fornecedor/2_consultarComprovanteNivelCadastramento": {
+      "get": {
+        "tags": [
+          "10 - FORNECEDOR"
+        ],
+        "operationId": "realizarConsultaCertidoes",
+        "parameters": [
+          {
+            "name": "pagina",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "tamanhoPagina",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          },
+          {
+            "name": "niFornecedor",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tipoCertidaoId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "uf",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericAPIResponseDTOVwFtFornecedorCertidoesDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/modulo-fornecedor/1_consultarFornecedor": {
       "get": {
         "tags": [
@@ -4186,7 +4385,7 @@
             }
           },
           {
-            "name": "naturezaJuridicaId",
+            "name": "naturezaJuridicaCodigoRFB",
             "in": "query",
             "required": false,
             "schema": {
@@ -4208,7 +4407,8 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "format": "int32"
             }
           },
           {
@@ -4217,6 +4417,22 @@
             "required": true,
             "schema": {
               "type": "boolean"
+            }
+          },
+          {
+            "name": "uf",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "municipio",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
             }
           }
         ],
@@ -9898,6 +10114,231 @@
           }
         }
       },
+      "FornecedorEstatisticoGeograficoDTO": {
+        "type": "object",
+        "properties": {
+          "codigoCnae": {
+            "type": "integer",
+            "format": "int32",
+            "example": 0
+          },
+          "ufSigla": {
+            "type": "string"
+          },
+          "nomeMunicipio": {
+            "type": "string"
+          },
+          "tipoFornecedor": {
+            "type": "string"
+          },
+          "nomeCnae": {
+            "type": "string"
+          },
+          "porteEmpresaId": {
+            "type": "integer",
+            "format": "int32",
+            "example": 0
+          },
+          "porteEmpresaNome": {
+            "type": "string"
+          },
+          "totalEmpresasAtivas": {
+            "type": "integer",
+            "format": "int32",
+            "example": 0
+          },
+          "totalEmpresasPorPorte": {
+            "type": "integer",
+            "format": "int32",
+            "example": 0
+          }
+        }
+      },
+      "GenericAPIResponseDTOFornecedorEstatisticoGeograficoDTO": {
+        "type": "object",
+        "properties": {
+          "resultado": {
+            "type": "array",
+            "description": "Lista de resultados da consulta",
+            "items": {
+              "$ref": "#/components/schemas/FornecedorEstatisticoGeograficoDTO"
+            }
+          },
+          "totalRegistros": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Total de registros encontrados",
+            "example": 0
+          },
+          "totalPaginas": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Total de páginas",
+            "example": 0
+          },
+          "paginasRestantes": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Páginas restantes",
+            "example": 0
+          }
+        }
+      },
+      "FornecedorEstatisticoGeograficoInternacionalDTO": {
+        "type": "object",
+        "properties": {
+          "paisCodigoIso": {
+            "type": "string"
+          },
+          "paisNome": {
+            "type": "string"
+          },
+          "totalFornecedoresAtivos": {
+            "type": "integer",
+            "format": "int32",
+            "example": 0
+          },
+          "totalFornecedores": {
+            "type": "integer",
+            "format": "int32",
+            "example": 0
+          }
+        }
+      },
+      "GenericAPIResponseDTOFornecedorEstatisticoGeograficoInternacionalDTO": {
+        "type": "object",
+        "properties": {
+          "resultado": {
+            "type": "array",
+            "description": "Lista de resultados da consulta",
+            "items": {
+              "$ref": "#/components/schemas/FornecedorEstatisticoGeograficoInternacionalDTO"
+            }
+          },
+          "totalRegistros": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Total de registros encontrados",
+            "example": 0
+          },
+          "totalPaginas": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Total de páginas",
+            "example": 0
+          },
+          "paginasRestantes": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Páginas restantes",
+            "example": 0
+          }
+        }
+      },
+      "GenericAPIResponseDTOVwFtFornecedorCertidoesDTO": {
+        "type": "object",
+        "properties": {
+          "resultado": {
+            "type": "array",
+            "description": "Lista de resultados da consulta",
+            "items": {
+              "$ref": "#/components/schemas/VwFtFornecedorCertidoesDTO"
+            }
+          },
+          "totalRegistros": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Total de registros encontrados",
+            "example": 0
+          },
+          "totalPaginas": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Total de páginas",
+            "example": 0
+          },
+          "paginasRestantes": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Páginas restantes",
+            "example": 0
+          }
+        }
+      },
+      "VwFtFornecedorCertidoesDTO": {
+        "type": "object",
+        "properties": {
+          "niFornecedor": {
+            "type": "string"
+          },
+          "nomeRazaoSocialFornecedor": {
+            "type": "string"
+          },
+          "tipoCertidaoId": {
+            "type": "integer",
+            "format": "int64",
+            "example": 0
+          },
+          "tipoCertidaoNome": {
+            "type": "string"
+          },
+          "abrangencia": {
+            "type": "string"
+          },
+          "dataValidade": {
+            "type": "string",
+            "format": "date",
+            "description": "YYYY-MM-DD",
+            "example": "2024-01-15 10:30:00"
+          },
+          "situacao": {
+            "type": "string"
+          },
+          "orgaoEmissorId": {
+            "type": "integer",
+            "format": "int64",
+            "example": 0
+          },
+          "orgaoEmissorNome": {
+            "type": "string"
+          },
+          "ufSigla": {
+            "type": "string"
+          }
+        }
+      },
+      "FornecedorLinhaFornecimentoDTO": {
+        "type": "object",
+        "properties": {
+          "codigoCatmat": {
+            "type": "string"
+          },
+          "codigoCatser": {
+            "type": "string"
+          },
+          "descricao": {
+            "type": "string"
+          }
+        }
+      },
+      "FornecedorSocioDTO": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "tipoPessoa": {
+            "type": "string"
+          },
+          "numeroParticipacaoAcionaria": {
+            "type": "number"
+          },
+          "dataHoraDesvinculacao": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
       "GenericAPIResponseDTOVwFtFornecedorDTO": {
         "type": "object",
         "properties": {
@@ -9940,19 +10381,26 @@
           "cpf": {
             "type": "string"
           },
-          "habilitadoLicitar": {
-            "type": "boolean"
+          "nomeRazaoSocialFornecedor": {
+            "type": "string"
           },
-          "codigoCnae": {
-            "type": "integer"
+          "nomeFantasia": {
+            "type": "string"
           },
-          "nomeCnae": {
+          "ufSigla": {
             "type": "string"
           },
           "nomeMunicipio": {
             "type": "string"
           },
-          "naturezaJuridicaId": {
+          "codigoCnae": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeCnae": {
+            "type": "string"
+          },
+          "naturezaJuridicaCodigoRFB": {
             "type": "integer",
             "format": "int64",
             "example": 0
@@ -9968,11 +10416,26 @@
           "porteEmpresaNome": {
             "type": "string"
           },
-          "nomeRazaoSocialFornecedor": {
+          "statusHabilitacaoGeral": {
             "type": "string"
           },
-          "ufSigla": {
+          "email": {
             "type": "string"
+          },
+          "telefone": {
+            "type": "string"
+          },
+          "socios": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FornecedorSocioDTO"
+            }
+          },
+          "linhasFornecimento": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FornecedorLinhaFornecimentoDTO"
+            }
           }
         }
       },
